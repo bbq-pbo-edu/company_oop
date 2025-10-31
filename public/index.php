@@ -1,3 +1,3 @@
 <?php
 include '../config/loader.php';
-echo 'Hallo';
+echo 'Du bist auf ' . $_ENV['DOMAIN_NAME'];
