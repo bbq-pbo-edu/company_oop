@@ -5,11 +5,11 @@ USE company;
 
 CREATE TABLE employee(
     id INT AUTO_INCREMENT PRIMARY KEY,
-    first_name varchar(32) NOT NULL,
-    last_name varchar(32) NOT NULL
+    firstName varchar(32) NOT NULL,
+    lastName varchar(32) NOT NULL
 );
 
-INSERT INTO employee(first_name, last_name)
+INSERT INTO employee(firstName, lastName)
 VALUES ('Max', 'Mueller'),
        ('Tim', 'Schmidt'),
        ('Tom', 'Meier');
