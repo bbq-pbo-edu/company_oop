@@ -1,8 +1,6 @@
 <?php
 
-namespace Entity;
-
 interface EntityInterface
 {
-
+    public function getID(): int;
 }

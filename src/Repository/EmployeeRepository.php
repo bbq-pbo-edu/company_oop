@@ -11,16 +11,16 @@ class EmployeeRepository extends AbstractRepository
         return $stmt->fetchAll(PDO::FETCH_CLASS, 'Employee');
     }
 
-    public function findById(int $id): array
+    public function findById(int $id): Employee
     {
         $conn = $this->dbConnect();
         $stmt = $conn->prepare("SELECT * FROM employee WHERE id = :id");
         $stmt->bindParam(":id", $id);
         $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_CLASS, 'Employee');
+        return $stmt->fetchObject('Employee');
     }
 
-    public function create(Employee $employee): bool
+    public function create(EntityInterface $employee): Employee
     {
         $conn = $this->dbConnect();
         $stmt = $conn->prepare("INSERT INTO employee (firstName, lastName) VALUES (:firstName, :lastName)");
@@ -29,11 +29,12 @@ class EmployeeRepository extends AbstractRepository
         $lastName = $employee->getLastName();
         $stmt->bindParam(":firstName", $firstName);
         $stmt->bindParam(":lastName", $lastName);
+        $stmt->execute();
 
-        return $stmt->execute();
+        return $this->findById($conn->lastInsertId());
     }
 
-    public function update(Employee $employee): bool
+    public function update(EntityInterface $employee): Employee
     {
         $conn = $this->dbConnect();
         $stmt = $conn->prepare("UPDATE employee SET firstName = :firstName, lastName = :lastName WHERE id = :id");
@@ -44,8 +45,9 @@ class EmployeeRepository extends AbstractRepository
         $stmt->bindParam(":id", $id);
         $stmt->bindParam(":firstName", $firstName);
         $stmt->bindParam(":lastName", $lastName);
+        $stmt->execute();
 
-        return $stmt->execute();
+        return $this->findById($id);
     }
 
     public function delete(int $id): bool

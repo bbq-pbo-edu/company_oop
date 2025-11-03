@@ -1,6 +1,6 @@
 <?php
 
-class Employee
+class Employee implements EntityInterface
 {
     private int $id;
     private string $firstName;

@@ -20,7 +20,7 @@ abstract class AbstractRepository
 
     public abstract function findAll();
     public abstract function findById(int $id);
-    public abstract function create(Employee $employee);
-    public abstract function update(Employee $employee);
+    public abstract function create(EntityInterface $entity);
+    public abstract function update(EntityInterface $entity);
     public abstract function delete(int $id);
 }
